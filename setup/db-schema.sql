@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS user(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_name VARCHAR(20) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE following(
+  follower_id INTEGER,
+  followee_id INTEGER,
+  PRIMARY KEY(follower_id, followee_id),
+  FOREIGN KEY (follower_id) REFERENCES user(id),
+  FOREIGN KEY (followee_id) REFERENCES user(id)
+);
+
+CREATE TABLE tweet(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER NOT NULL,
+  body VARCHAR(255),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (user_id) REFERENCES user(id)
+);
