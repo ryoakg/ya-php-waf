@@ -30,20 +30,23 @@ session_start();
         '/signup' => ['GET' => ['User', 'signup_prompt']],
         '/login'  => ['GET' => ['User', 'login_prompt']],
 
-        '/user'    => ['POST' => ['User', 'signup'],
-                       'GET'  => ['Timeline', 'show'],
-        ],
-        '/user/tweet' => ['POST' => ['Tweet', 'create'],],
+        '/user'        => ['POST' => ['User', 'signup']],
+
         '/user/login'  => ['POST' => ['User', 'login'],
                            'PUT'  => ['User', 'login'],
                            'DELETE' => ['User', 'logout']
         ],
+
+        '/user/:user_id' => ['GET' => ['Timeline', 'show']],
+        '/user/:user_id/tweet' => ['POST' => ['Tweet', 'create'],],
     ])
 );
+
 
 $path_to_route = \Framework\Route::path_to_route();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') $_SESSION['prev_url'] = $path_to_route;
+
 $f = \Framework\Route::resolve($path_to_route);
 if (! $f) {
     http_response_code(404);
