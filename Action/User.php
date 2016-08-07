@@ -62,10 +62,10 @@ class User {
                 // https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.4
                 // 多分 303 が適切。あとでちゃんと読む
 
-                // DOS の対策でタイマで遅延した方がいい?
-                // $_SESSION['user_id'] = ;
-                header("Location: /", true, 303);
+                $redirect_to = "/user/{$_SESSION['user_id']}";
+                header("Location: {$redirect_to}", true, 303);
             } else {
+                // DOS の対策でタイマで遅延した方がいい?
                 $_SESSION['FLASH'][] = 'ログイン失敗';
                 self::login_prompt();
             }
