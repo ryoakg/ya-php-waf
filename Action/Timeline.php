@@ -26,7 +26,7 @@ class Timeline {
                    function() use ($user_id, $tweets, $page, $n_pages, $page_range){
                        T::render('user/timeline',
                                  ['tweet_editor' =>
-                                  ($user_id === $_SESSION['user_id']) ? ['post_to' => "/user/{$user_id}/tweet"] : NULL,
+                                  (isset($_SESSION['user_id']) && $user_id === $_SESSION['user_id']) ? ['post_to' => "/user/{$user_id}/tweet"] : NULL,
 
                                   'tweets' => $tweets,
 
