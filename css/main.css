@@ -1,25 +1,205 @@
+/* reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* foundation */
+body {
+  background-color: #dee;
+}
+
+/* HEADER */
+.header {
+  position: relative;
+  width: 100%;
+  height: 80px;
+  background-color: #cdd;
+}
+
+.site-title {
+  font-size: 40px;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.site-title a:visited,
+.site-title a:link {
+  color: #8aa;
+  text-decoration: none;
+}
+
 .log-in-out-button {
-  background-color: #444;
+  background-color: #777;
   cursor: pointer;
   border: none;
   color: white;
   padding: 7px 20px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
   font-size: 16px;
+
+  /* display: inline-block; */
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
+/* CONTENTS */
+.main {
+  padding-top: 20px;
+  height: 100%;
+  max-width: 440px;
+  min-width: 440px;
+  margin: 0 auto;
+}
+
+.page-title {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #aaa;
+}
+
+/* TWEET */
 .tweet-editor {
-  background-color: cyan;
-  border-radius: 10px;
-  width: 450px;
+  background-color: #add;
+  position: relative;
+  height: 140px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .tweet-editor_content {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 400px;
-  height: 7em;
-  margin: 20px;
-  border-radius: 10px;
+  top: 15px;
+  height: 5em;
+  border-radius: 5px;
   line-height: 1.5em;
+  overflow-y: scroll;
+}
+
+.tweet-editor_submit-button {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  color: #666;
+  background-color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.tweets {
+  display: block;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  background-color: #aee;
+}
+
+.tweet {
+  display: block;
+  font-size: x-large;
+  padding: 20px;
+  color: #666;
+}
+
+.tweet ~ .tweet {
+  border-top: 1px solid #aaa;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 35px;
+  position: relative;
+  display: block;
+
+  /* remove space between inline-block elements */
+  font-size: 0px;
+}
+
+.pagination_prev-page,
+.pagination_next-page,
+.pagination_numbers {
+  position: absolute;
+  display: inline-block;
+}
+
+.pagination_prev-page {
+  left: 0;
+}
+
+.pagination_next-page {
+  right: 0;
+}
+
+.pagination_numbers {
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  /* (25(width) + 1(margin)*2) * 5 */
+  width: 135px;
+}
+
+.pagination_cell {
+  background-color: #ddd;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  line-height: 25px;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+}
+
+.pagination_cell.CURRENT {
+  background-color: #aee;
+}
+
+.pagination_cell.DISABLE {
+  background-color: #e8e8e8;
+  color: #ccc;
+}
+
+.pagination_cell * {
+  color: #666;
+}
+
+.pagination_page {
+  margin: 0 1px;
+  border-image-width: 0;
+}
+
+.pagination_cell > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Utils */
+.clearfix:after {
+  clear: both;
+  content: "";
+  display: block;
+  height: 0;
 }
