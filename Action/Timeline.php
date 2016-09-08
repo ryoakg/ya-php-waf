@@ -13,7 +13,7 @@ class Timeline {
         $page = filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT, ['options'=>['min_range'=>0]]);
         if (! $page || $page < 0) $page = 0;
 
-        $page_range = 2;        // 設定
+        $page_range = 5;        // 設定
         $tweets_per_page = 5;   // 設定
 
         $n_tweets = \Model\Tweet::n($user_id);

@@ -3,40 +3,37 @@
  * $url: 基準になる URL のパス。これに現在のページ番号を表すクエリストリング p を付ける
  * $n_pages: 総ページ数
  * $current: 今のページ番号
- * $range: 今のページから前後何ページ見せるか
+ * $range: いくつ、前後のページの数字のリンクを作るか?(奇数)
  */
 use \Framework\Template as T;
-$last_page = $n_pages-1
+$last_page = $n_pages - 1;
+$start = max($current - (int)($range / 2), 0);
+$end = min($start + $range - 1, $last_page);
 ?>
-<?php if($current <= 0): ?>
-  <span class="pagination_prev-page.DISABLED" >a</span>
-<?php else: ?>
-  <a href="<?php echo $url . '?p=' . ($current-1); ?>" class="pagination_prev-page.ENABLED">a</a>
-<?php endif; ?>
+<div class="pagination">
+  <?php if($current <= 0): ?>
+    <i class="pagination_cell pagination_prev-page DISABLE fa fa-angle-double-left" aria-hidden="true"></i>
+  <?php else: ?>
+    <a href="<?php echo $url . '?p=' . ($current-1); ?>" class="pagination_cell pagination_prev-page">
+      <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+    </a>
+  <?php endif; ?>
 
-<?php
-$start = $current - $range;
-if ($start < 0) $start = 0;
-
-$end = $current + $range;
-if ($end > $last_page) $end = $last_page;
-?>
-<ol>
-  <?php foreach(range($start, $end) as $n): ?>
-    <li>
+  <ol class="pagination_numbers">
+    <?php foreach(range($start, $end) as $n): ?><li class="pagination_cell pagination_page <?php echo ($n === $current ? 'CURRENT' : ''); ?>">
       <?php if ($n === $current): ?>
-        <span class="pagination_page.DISABLED"><?php echo $n; ?></span>
+        <span><?php echo $n+1; ?></span>
       <?php else: ?>
-        <a href="<?php echo $url . '?p=' . $n; ?>" class="pagination_page.ENABLED">
-          <?php echo $n; ?>
-        </a>
+        <a href="<?php echo $url . '?p=' . $n; ?>"><?php echo $n+1; ?></a>
       <?php endif; ?>
-    </li>
-  <?php endforeach; ?>
-</ol>
+    </li><?php endforeach; ?>
+  </ol>
 
-<?php if($last_page <= $current): ?>
-  <span class="pagination_next-page.DISABLED" >b</span>
-<?php else: ?>
-  <a href="<?php echo $url . '?p=' . ($current+1); ?>" class="pagination_next-page.ENABLED">b</a>
-<?php endif; ?>
+  <?php if($last_page <= $current): ?>
+    <i class="pagination_cell pagination_next-page DISABLE fa fa-angle-double-right" aria-hidden="true"></i>
+  <?php else: ?>
+    <a class="pagination_cell pagination_next-page" href="<?php echo $url . '?p=' . ($current+1); ?>">
+      <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+    </a>
+  <?php endif; ?>
+</div>
