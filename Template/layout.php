@@ -25,7 +25,7 @@ use \Framework\Template as T;
 
     <?php T::render('flash',[]); ?>
     <main id="main" class="main">
-      <h2><?php echo T::h($title);?></h2>
+      <h2 class="page-title"><?php echo T::h($title); ?></h2>
       <?php $content(); ?>
     </main>
   </body>
