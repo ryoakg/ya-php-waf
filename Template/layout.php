@@ -11,19 +11,17 @@ use \Framework\Template as T;
     <link rel="stylesheet" type="text/css" href="/css/main.css">
   </head>
   <body>
-    <div id="header" class="header">
-      <h1><a href="/">Mini Blog</a></h1>
-    </div>
-    <div class="nav-bar" id="nav-bar">
+    <header id="header" class="header clearfix">
+      <h1 class="site-title"><a href="/">Mini Blog</a></h1>
       <?php if ($logged_in): ?>
-        <form action="/user/login" method="POST">
+        <form id="logout-form" class="logout-form" action="/user/login" method="POST">
           <input type="hidden" name="_method" value="DELETE">
-          <button class="log-in-out-button" type="submit" >ログアウト</button>
         </form>
+        <button form="logout-form" class="log-in-out-button" type="submit" >ログアウト</button>
       <?php else: ?>
         <a class="log-in-out-button" href="/login">ログイン</a>
       <?php endif; ?>
-    </div>
+    </header>
 
     <?php T::render('flash',[]); ?>
     <main id="main" class="main">
