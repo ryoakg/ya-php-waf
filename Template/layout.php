@@ -6,6 +6,8 @@ use \Framework\Template as T;
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title><?php if (isset($title)) echo T::h($title) . ' - '; ?>Mini Blog</title>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/main.css">
   </head>
   <body>
