@@ -2,16 +2,7 @@
 
 <h2 class="timeline-user-name"><?php echo T::h($user_name); ?></h2>
 <?php if (isset($follow)): ?>
-  <form id="follow-form" class="follow-form"
-    action="<?php echo $follow['post_to']; ?>"
-    method="POST">
-    <button class="follow-button" type="submit">
-      <?php echo $follow['is_followed'] ? 'unfollow!' : 'follow!'; ?>
-    </button>
-    <?php if ($follow['is_followed']): ?>
-      <input type="hidden" name="_method" value="DELETE">
-    <?php endif; ?>
-  </form>
+  <?php T::render('follow_button', $follow); ?>
 <?php endif; ?>
 
 <?php if(isset($tweet_editor)): ?>
