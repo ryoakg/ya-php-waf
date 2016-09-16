@@ -71,6 +71,35 @@ body {
   color: #aaa;
 }
 
+.timeline-user-name,
+.follow-form {
+  height: 35px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.timeline-user-name {
+  width: 345px;
+  font-size: 30px;
+  color: #aaa;
+}
+
+.follow-form {
+  width: 90px;
+}
+
+.follow-button {
+  color: #666;
+  background-color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  padding: 7px 20px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+}
+
 /* TWEET */
 .tweet-editor {
   background-color: #add;
