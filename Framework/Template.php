@@ -16,11 +16,8 @@ final class Template {
     }
 
     static public function render_list($template, $list){
-        $tmpl = self::resolve($template);
-        foreach($list as $vars){
-            extract($vars);
-            require $tmpl;
-        }
+        foreach($list as $vars)
+            self::render($template, $vars);
     }
 
     static public function render_as_string($template, $vars){
