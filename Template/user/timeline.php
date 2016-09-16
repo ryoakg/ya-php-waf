@@ -10,12 +10,6 @@
 <?php endif; ?>
 
 <ol class="tweets">
-  <?php foreach($tweets as $t): ?>
-    <li class="tweet">
-      <div class="tweet_body"><?php echo T::h($t['body']); ?></div>
-      <span class="tweet_user-name"><?php echo T::h($t['user_name']); ?></span>
-      <span class="tweet_tweeted-at"><?php echo T::h($t['created_at']); ?></span>
-    </li>
-  <?php endforeach; ?>
+  <?php T::render_list('tweet_list', $tweets); ?>
 </ol>
 <?php T::render('pagination', $pagination); ?>
