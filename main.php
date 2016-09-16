@@ -39,6 +39,8 @@ session_start();
 
         '/user/:user_id' => ['GET' => ['Timeline', 'show']],
         '/user/:user_id/tweet' => ['POST' => ['Tweet', 'create'],],
+        '/user/:follower_id/follow/:followee_id' => ['POST' => ['Follow', 'create'],
+                                                     'DELETE' => ['Follow', 'delete']],
     ])
 );
 
