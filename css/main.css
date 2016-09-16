@@ -118,13 +118,25 @@ body {
 
 .tweet {
   display: block;
-  font-size: x-large;
   padding: 20px;
   color: #666;
 }
 
 .tweet ~ .tweet {
   border-top: 1px solid #aaa;
+}
+
+.tweet_body {
+  display: block;
+  font-size: x-large;
+  margin-bottom: 8px;
+}
+
+.tweet_user-name,
+.tweet_tweeted-at {
+  display: inline-block;
+  color: #888;
+  font-size: 12px;
 }
 
 /* PAGINATION */
