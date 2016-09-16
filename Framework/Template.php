@@ -15,6 +15,14 @@ final class Template {
         require self::resolve($template);
     }
 
+    static public function render_list($template, $list){
+        $tmpl = self::resolve($template);
+        foreach($list as $vars){
+            extract($vars);
+            require $tmpl;
+        }
+    }
+
     static public function render_as_string($template, $vars){
         extract($vars);
         ob_start();
