@@ -28,10 +28,13 @@ class Timeline {
                        T::render('user/timeline',
                                  ['user_name' => $user['user_name'],
                                   'user_id' => $user_id,
-                                  'tweet_editor' =>
-                                  ($my_user_id && $user_id === $my_user_id) ? ['post_to' => "/user/{$user_id}/tweet"] : NULL,
-
                                   'tweets' => $tweets,
+
+                                  'tweet_editor' =>
+                                  ($my_user_id && $user_id === $my_user_id) ?
+                                  ['post_to' => "/user/{$user_id}/tweet",
+                                   'csrf_token' => \Model\CSRF::get_and_store()] : NULL,
+
                                   'follow' => ($my_user_id && $my_user_id !== $user_id) ?
                                   ['post_to' => "/user/{$my_user_id}/follow/{$user_id}",
                                    'is_followed' => \Model\Following::is_followed($my_user_id, $user_id)] : NULL,
