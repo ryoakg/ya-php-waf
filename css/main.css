@@ -237,6 +237,22 @@ body {
   height: 100%;
 }
 
+/* flash */
+.flash {
+  background-color: #fbb;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.flash-item {
+  color: #444;
+}
+
+.flash-item ~ .flash-item {
+  margin-top: 10px;
+}
+
 /* Utils */
 .clearfix:after {
   clear: both;
