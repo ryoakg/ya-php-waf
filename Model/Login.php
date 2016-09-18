@@ -31,7 +31,7 @@ class Login {
     public static function ensure_logged_in(){
         if (self::is_logged_in()){
             http_response_code(401);
-            throw new \Exception('Unauthorized');
+            throw new \Framework\UnauthorizedException();
         }
     }
 }
