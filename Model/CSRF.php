@@ -17,7 +17,7 @@ class CSRF {
     public static function ensure_token_is_valid($token){
         if (! self::is_valid_token($token)){
             http_response_code(403);
-            throw new \Exception('Forbidden');
+            throw new \Framework\CsrfException();
         }
     }
 }
