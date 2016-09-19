@@ -15,27 +15,20 @@ class User {
     }
 
     public static function signup(){
-        $err = [];
-
         $name = filter_input(INPUT_POST, 'user_name', FILTER_VALIDATE_REGEXP,
                              ['options'=>["regexp"=>"/[a-zA-Z0-9_\-]{4,20}/"]]);
-        if (! $name) $err[] = 'invalid user name';
-
+        if (! $name) throw new InvalidRequestParameterException('username');
         $pass = filter_input(INPUT_POST, 'password', FILTER_VALIDATE_REGEXP,
                              ['options'=>["regexp"=>"/[a-zA-Z0-9_!@#$%^&~`\\|:;<>{}\-]{8,20}/"]]);
-        if (! $pass) $err[] = 'invalid password';
+        if (! $password) throw new InvalidRequestParameterException('password');
 
-        if (! empty($err)){
-            $_SESSION['FLASH'] = $err;
-            http_response_code(400);
-            self::signup_prompt();
-            // DOS の対策でタイマで遅延した方がいい?
-            exit;
-        }
-
+        // ユーザ名が重複した場合は、例外が出るのでここで捕捉すべき
+        // APIなど作ってUI側もっていく事もできるけど、とりあえずやらない
         \Model\User::create($name, $pass);
+
         // https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.3.4
-        // 多分 303 が適切。あとでちゃんと読む
+        //   the entity of the response SHOULD contain a short hypertext note with a hyperlink to the new URI(s).
+        //   面倒なので省略
         header("Location: /", true, 303);
     }
 
