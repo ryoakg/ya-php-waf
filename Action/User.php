@@ -71,11 +71,4 @@ class User {
         \Model\Login::logout();
         header("Location: /", true, 303);
     }
-
-    // APIで POST を受ける場合
-    // 入力は基本的に JSON. form ではない
-    // 201 を返す
-    // header("Location: /...", true, 201);
-    // とかもあった方がいいかも
-    // 中身の処理は、HTML 返す場合と同じ
 }
