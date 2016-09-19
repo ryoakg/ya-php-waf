@@ -1,5 +1,9 @@
 <?php use \Framework\Template as T; ?>
-<?php T::render('tweet_editor', $tweet_editor); ?>
+
+<?php if(isset($tweet_editor)): ?>
+  <?php T::render('tweet_editor', $tweet_editor); ?>
+<?php endif; ?>
+
 <?php if(empty($tweets)): ?>
   <p>はじめての Tweet</p>
 <?php else: ?>
