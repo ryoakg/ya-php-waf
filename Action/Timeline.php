@@ -20,8 +20,7 @@ class Timeline {
         $n_pages = (int) ceil($n_tweets / $tweets_per_page);
         $tweets = \Model\Tweet::id_of($user_id, $page*$tweets_per_page, $tweets_per_page);
         T::render('layout',
-                  ['title' => 'タイムライン',
-                   'logged_in' => \Model\Login::is_logged_in(),
+                  ['logged_in' => \Model\Login::is_logged_in(),
                    'content' =>
                    function() use ($user_id, $tweets, $page, $n_pages, $page_range){
                        T::render('user/timeline',
