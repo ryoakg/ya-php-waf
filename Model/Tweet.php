@@ -8,10 +8,14 @@ final class Tweet {
             ->execute(array($user_id, $body));
     }
 
-    public static function id_of($user_id){
+    public static function id_of($user_id, $from, $n){
         $db = \Framework\Db::getConnection();
-        $stmt = $db->prepare('SELECT body FROM tweet WHERE user_id = ? ORDER BY id');
-        $stmt->execute(array($user_id));
-        return $stmt->fetchAll();
+        $stmt = $db->prepare('SELECT body FROM tweet
+                               WHERE user_id = ?
+                               ORDER BY id DESC
+                               LIMIT ?
+                              OFFSET ?');
+        $stmt->execute(array($user_id, $n, $from));
+        return array_map(function ($x){ return $x['body']; }, $stmt->fetchAll());
     }
 }
