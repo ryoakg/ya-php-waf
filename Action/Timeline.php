@@ -8,8 +8,11 @@ class Timeline {
         $my_user_id = \Model\Login::get_current_user_id();
         if (! \Model\User::get($user_id)){
             http_response_code(404);
-            echo '404 Not Found.';
-            exit;
+            T::render('layout',
+                      ['title' => 'そのユーザは存在しません',
+                       'logged_in' => \Model\Login::is_logged_in(),
+                       'content' => function (){}]);
+            return;
         }
         $page = filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT, ['options'=>['min_range'=>0, 'default'=>0]]);
 
