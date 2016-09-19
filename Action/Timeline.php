@@ -11,8 +11,7 @@ class Timeline {
             echo '404 Not Found.';
             exit;
         }
-        $page = filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT, ['options'=>['min_range'=>0]]);
-        if (! $page || $page < 0) $page = 0;
+        $page = filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT, ['options'=>['min_range'=>0, 'default'=>0]]);
 
         $page_range = 5;        // 設定
         $tweets_per_page = 5;   // 設定
