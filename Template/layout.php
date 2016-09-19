@@ -23,7 +23,7 @@ use \Framework\Template as T;
     </header>
 
     <?php T::render('flash',[]); ?>
-    <main id="main" class="main">
+    <main id="main" class='main<?php if (isset($content_css_class)) echo " {$content_css_class}"; ?>'>
       <?php if (isset($title)): ?>
         <h2 class="page-title"><?php echo T::h($title); ?></h2>
       <?php endif; ?>
