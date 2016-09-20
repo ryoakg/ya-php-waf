@@ -75,17 +75,16 @@ body {
 .follow-form {
   height: 35px;
   margin-bottom: 20px;
-  display: inline-block;
 }
 
 .timeline-user-name {
-  width: 345px;
   font-size: 30px;
   color: #aaa;
+  float:left;
 }
 
 .follow-form {
-  width: 90px;
+  float:right;
 }
 
 .follow-button {

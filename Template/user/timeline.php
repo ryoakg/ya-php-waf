@@ -4,6 +4,7 @@
 <?php if (isset($follow)): ?>
   <?php T::render('follow_button', $follow); ?>
 <?php endif; ?>
+<div class="clearfix"></div>
 
 <?php if(isset($tweet_editor)): ?>
   <?php T::render('tweet_editor', $tweet_editor); ?>
