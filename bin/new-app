@@ -1,0 +1,40 @@
+#!/bin/sh
+
+usage(){
+  [ -z "$1" ] || printf "$1\n\n"
+  printf "Usage: $0 <app name>\n"
+  exit 1;
+}
+
+[ -z "$1" ] && usage
+type composer > /dev/null 2>&1 || usage "composer command required."
+
+APP_NAME=$1
+APP_DIR=`pwd`/${APP_NAME}
+TOP=$(cd `dirname $0`/.. ; pwd)
+
+cp -r ${TOP}/project-template/ ${APP_DIR}/
+cd ${APP_DIR}
+
+ln -fs ${TOP}/Framework
+
+composer init \
+         --quiet \
+         --no-interaction \
+         --type=project \
+         --require-dev="psy/psysh=@stable"
+# !! short cut !!
+composer update
+
+cat <<EOF
+Done!
+
+Basic usage:
+
+  To start web app:
+    ./bin/web-app
+
+  To start CLI(You can modify DB, test functions, and so on):
+    ./bin/cli-shell
+
+EOF
