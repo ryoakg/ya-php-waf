@@ -3,6 +3,8 @@ namespace Action;
 
 class Follow {
     private static function create_delete($fun, $url_param){
+        \Model\CSRF::ensure_token_is_valid(filter_input(INPUT_POST, 'csrf_token'));
+
         $follower_id = $url_param['follower_id'];
         $followee_id = $url_param['followee_id'];
 
