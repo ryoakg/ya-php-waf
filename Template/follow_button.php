@@ -4,6 +4,7 @@
   class="follow-form"
   action="<?php echo $post_to; ?>"
   method="POST">
+  <input type="hidden" name="csrf_token" value="<?php echo $csrf_token; ?>">
   <button class="follow-button" type="submit">
     <?php echo $is_followed ? 'Unfollow!' : 'Follow!'; ?>
   </button>
