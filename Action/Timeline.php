@@ -23,10 +23,12 @@ class Timeline {
         $n_pages = (int) ceil($n_tweets / $tweets_per_page);
         $tweets = \Model\Tweet::with_following_users($user_id, $page*$tweets_per_page, $tweets_per_page);
         $user = \Model\User::get($user_id);
+
+        $csrf_token = \Model\CSRF::get_and_store();
         T::render('layout',
                   ['logged_in' => \Model\Login::is_logged_in(),
                    'content' =>
-                   function() use ($user_id, $user, $my_user_id, $tweets, $page, $n_pages, $page_range){
+                   function() use ($user_id, $user, $my_user_id, $tweets, $page, $n_pages, $page_range, $csrf_token){
                        T::render('user/timeline',
                                  ['user_name' => $user['user_name'],
                                   'user_id' => $user_id,
@@ -35,11 +37,13 @@ class Timeline {
                                   'tweet_editor' =>
                                   ($my_user_id && $user_id === $my_user_id) ?
                                   ['post_to' => "/user/{$user_id}/tweet",
-                                   'csrf_token' => \Model\CSRF::get_and_store()] : NULL,
+                                   'csrf_token' => $csrf_token] : NULL,
 
                                   'follow' => ($my_user_id && $my_user_id !== $user_id) ?
                                   ['post_to' => "/user/{$my_user_id}/follow/{$user_id}",
-                                   'is_followed' => \Model\Following::is_followed($my_user_id, $user_id)] : NULL,
+                                   'is_followed' => \Model\Following::is_followed($my_user_id, $user_id),
+                                   'csrf_token' => $csrf_token] : NULL,
+
                                   'pagination' => ['url' => "/user/{$user_id}",
                                                    'n_pages' => $n_pages,
                                                    'current' => $page,
