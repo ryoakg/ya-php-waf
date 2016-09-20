@@ -1,0 +1,6 @@
+/vendor
+/composer.lock
+/data
+/logs
+/resources/router-script/*
+!/resources/router-script/router.php
