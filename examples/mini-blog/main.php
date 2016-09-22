@@ -15,13 +15,6 @@ spl_autoload_register(function($class){
     throw new Exception("class `$class` is not found.");
 }, true);
 
-
-function term_dump($x){
-    ob_start();
-    var_dump($x);
-    error_log(ob_get_clean(), 4);
-}
-
 session_start();
 
 \Framework\Route::set_url_patterns(
