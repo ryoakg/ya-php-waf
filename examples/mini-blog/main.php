@@ -44,7 +44,6 @@ session_start();
     ])
 );
 
-
 $path_to_route = \Framework\Route::path_to_route();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') $_SESSION['prev_url'] = $path_to_route;
@@ -57,11 +56,3 @@ if (! $f) {
 }
 
 $f();
-// try {
-//     $f();
-// } catch (Exception $e){
-//     echo "error!!" . PHP_EOL;
-// }
-
-
-// Action\User::signup_prompt();
