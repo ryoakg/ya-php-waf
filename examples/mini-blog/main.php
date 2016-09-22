@@ -48,4 +48,17 @@ if (! $f) {
     exit;
 }
 
-$f();
+try {
+    $f();
+} catch (\Framework\CsrfException $e){
+    http_response_code(403);
+    echo "403 Forbidden";
+} catch (\Framework\InvalidRequestParameterException $e){
+    http_response_code(400);
+    echo "400 Bad Request";
+} catch (\Framework\UnauthorizedRequestException $e){
+    http_response_code(401);
+    echo "401 Unauthorized";
+} catch (Exception $e){
+    throw $e;
+}
