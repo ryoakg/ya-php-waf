@@ -18,7 +18,7 @@ spl_autoload_register(function($class){
 session_start();
 
 \Framework\Route::set_url_patterns(
-    \Framework\Route::compile_url_patterns([
+    \Framework\Route::compile_url_action_map([
         '/'       => ['GET' => ['StaticPage', 'top']],
         '/signup' => ['GET' => ['User', 'signup_prompt']],
         '/login'  => ['GET' => ['User', 'login_prompt']],
@@ -41,15 +41,15 @@ $path_to_route = \Framework\Route::path_to_route();
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') $_SESSION['prev_url'] = $path_to_route;
 
-$f = \Framework\Route::resolve($path_to_route);
-if (! $f) {
+$action = \Framework\Route::resolve($path_to_route);
+if (! $action) {
     http_response_code(404);
     echo '404 Not Found.';
     exit;
 }
 
 try {
-    $f();
+    $action();
 } catch (\Framework\CsrfException $e){
     http_response_code(403);
     echo "403 Forbidden";
