@@ -134,10 +134,10 @@ final class Route {
 
     // どこで実行するのがいいかは分からないけど
     // 1回コンパイルしてそれをキャッシュするのが一番効率がいい
-    public static function compile_url_patterns($definitions) {
+    public static function compile_url_action_map($definitions) {
         $a = array();
-        foreach ($definitions as $url_pattern => $x)
-            $a[self::_compile_url_pattern_to_named_capuring_regex($url_pattern)] = $x;
+        foreach ($definitions as $url_pattern => $http_method_action_map)
+            $a[self::_compile_url_pattern_to_named_capuring_regex($url_pattern)] = $http_method_action_map;
         return $a;
         // self::$url_pattern_map = $a;
     }
