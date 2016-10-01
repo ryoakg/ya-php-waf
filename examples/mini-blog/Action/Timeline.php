@@ -16,8 +16,8 @@ class Timeline {
         }
         $page = filter_input(INPUT_GET, 'p', FILTER_VALIDATE_INT, ['options'=>['min_range'=>0, 'default'=>0]]);
 
-        $page_range = 5;        // 設定
-        $tweets_per_page = 5;   // 設定
+        $page_range = \Config\Pagination\page_range;
+        $tweets_per_page = \Config\Pagination\tweets_per_page;
 
         $n_tweets = \Model\Tweet::n($user_id);
         $n_pages = (int) ceil($n_tweets / $tweets_per_page);
