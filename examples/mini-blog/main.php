@@ -1,12 +1,7 @@
 <?php
-const APP_ROOT_DIR = __DIR__;
+// Loading
 require_once __DIR__ . '/vendor/autoload.php';
 
-// ini(仮)  http://qiita.com/mpyw/items/2f9955db1c02eeef43ea
-error_reporting(E_ALL | E_STRICT);
-ini_set('display_errors', 'On');
-
-// initialize Loader
 spl_autoload_register(function($class){
     $file = str_replace('\\', DIRECTORY_SEPARATOR , $class) . '.php';
     if (is_readable($file)) require_once($file);
@@ -15,17 +10,29 @@ spl_autoload_register(function($class){
     throw new Exception("class `$class` is not found.");
 }, true);
 
+// Config
+const APP_ROOT_DIR = __DIR__;
+
+// error
+// ini(仮)  http://qiita.com/mpyw/items/2f9955db1c02eeef43ea
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 'On');
+
+
+// main
 session_start();
 
+// routing
 $m = \Framework\Route::compile_url_action_map(require 'config/route.php');
 \Framework\Route::set_url_patterns($m);
 
 $path_to_route = \Framework\Route::path_to_route();
 
+// hook
 if ($_SERVER['REQUEST_METHOD'] === 'GET') $_SESSION['prev_url'] = $path_to_route;
 
-$action = \Framework\Route::resolve($path_to_route);
-if (! $action) {
+// HTTP response
+if (! $action = \Framework\Route::resolve($path_to_route)) {
     http_response_code(404);
     echo '404 Not Found.';
     exit;
