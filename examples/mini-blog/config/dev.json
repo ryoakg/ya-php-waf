@@ -1,0 +1,9 @@
+{
+  "Db":{
+    "dsn":"sqlite:data/dev.sqlite"
+  },
+  "Pagination":{
+    "page_range":5,
+    "tweets_per_page":5
+  }
+}
