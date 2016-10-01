@@ -1,0 +1,32 @@
+#!/bin/sh
+
+usage(){
+  [ -z "$1" ] || printf "$1\n\n"
+  printf "Usage: $0 [<environment>]\n"
+  exit 1
+}
+
+port=8080
+env='dev'
+
+while [ $# -gt 0 ] ; do
+  case "$1" in
+    "-h"|"--help") usage ;;
+    "-p"|"--port")
+      [ -z "$2" ] && usage "port number required."
+      port="$2"
+      shift; shift;
+      ;;
+    "-e"|"--environment")
+      [ -z "$2" ] && usage "port number required."
+      port="$2"
+      shift; shift;
+      ;;
+    *)
+      usage "Unknown switch '$1' was specified."
+  esac
+done
+
+router_script="resources/router-script/${env}.php"
+[ ! -f "${router_script}" ] && usage "${router_script} is not found."
+exec php -S localhost:${port} -t document-root ${router_script}
