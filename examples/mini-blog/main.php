@@ -12,6 +12,13 @@ spl_autoload_register(function($class){
 
 // Config
 const APP_ROOT_DIR = __DIR__;
+require_once('Framework/Config.php');
+$env = 'dev';
+// You can load config runtime:
+eval(\Config\generate('common.json', "{$env}.json"));
+// You can also `require` config that has be made in advance:
+//   file_put_contents("compiled-config/{$env}.php", \Config\generate('common.json', "{$env}.json"));
+//   requrie "compiled-config/{$env}.php"
 
 // error
 // ini(仮)  http://qiita.com/mpyw/items/2f9955db1c02eeef43ea
@@ -19,7 +26,8 @@ error_reporting(E_ALL | E_STRICT);
 ini_set('display_errors', 'On');
 
 
-// main
+
+/** main */
 session_start();
 
 // routing
