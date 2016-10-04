@@ -13,7 +13,7 @@ spl_autoload_register(function($class){
 // Config
 const APP_ROOT_DIR = __DIR__;
 require_once('Framework/Config.php');
-$env = 'dev';
+$env = basename(__FILE__, '.php');
 // You can load config runtime:
 eval(\Config\generate('common.json', "{$env}.json"));
 // You can also `require` config that has be made in advance:
