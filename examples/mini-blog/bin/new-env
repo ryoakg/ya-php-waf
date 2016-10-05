@@ -1,0 +1,21 @@
+#!/bin/sh
+
+usage(){
+  [ -z "$1" ] || printf "$1\n\n"
+  printf "Usage: $0 [<environment>]\n"
+  exit 1
+}
+
+type sqlite3 > /dev/null 2>&1 || usage "sqlite3 command required."
+
+case "$1" in
+  "-h"|"--help") usage ;;
+esac
+
+[ -z "$1" ] && usage
+env="$1"
+
+sqlite3 data/${env}.sqlite < resources/db-schema.sql
+
+ln resources/router-script/router.php resources/router-script/${env}.php
+touch ${env}.php
