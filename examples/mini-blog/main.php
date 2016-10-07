@@ -17,25 +17,8 @@ spl_autoload_register(function($class){
 
 session_start();
 
-\Framework\Route::set_url_patterns(
-    \Framework\Route::compile_url_action_map([
-        '/'       => ['GET' => ['StaticPage', 'top']],
-        '/signup' => ['GET' => ['User', 'signup_prompt']],
-        '/login'  => ['GET' => ['User', 'login_prompt']],
-
-        '/user'        => ['POST' => ['User', 'signup']],
-
-        '/user/login'  => ['POST' => ['User', 'login'],
-                           'PUT'  => ['User', 'login'],
-                           'DELETE' => ['User', 'logout']
-        ],
-
-        '/user/:user_id' => ['GET' => ['Timeline', 'show']],
-        '/user/:user_id/tweet' => ['POST' => ['Tweet', 'create'],],
-        '/user/:follower_id/follow/:followee_id' => ['POST' => ['Follow', 'create'],
-                                                     'DELETE' => ['Follow', 'delete']],
-    ])
-);
+$m = \Framework\Route::compile_url_action_map(require 'config/route.php');
+\Framework\Route::set_url_patterns($m);
 
 $path_to_route = \Framework\Route::path_to_route();
 
