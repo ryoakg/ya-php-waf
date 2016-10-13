@@ -1,0 +1,19 @@
+{
+  "Db":{
+    "dsn":"sqlite:data/data.sqlite"
+  },
+  "UrlLog":{
+    "session_key":"*url-log*"
+  },
+  "Flash":{
+    "session_key":"*FLASH*"
+  },
+  "CSRF":{
+    "session_key":"*csrf-token*",
+    "form_var_name":"csrf_token",
+    "token_size":32
+  },
+  "Cli":{
+    "message":""
+  }
+}
