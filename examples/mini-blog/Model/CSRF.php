@@ -3,7 +3,7 @@ namespace Model;
 
 class CSRF {
     public static function get_and_store(){
-        $token = \Framework\SecureRandom::make_random_string(32); // 設定
+        $token = \Framework\SecureRandom::make_random_string(\Config\CSRF\token_size);
         $_SESSION[\Config\CSRF\session_key] = $token;
         return $token;
     }
