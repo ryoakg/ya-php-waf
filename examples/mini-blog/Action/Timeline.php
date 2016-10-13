@@ -37,12 +37,12 @@ class Timeline {
                                   'tweet_editor' =>
                                   ($my_user_id && $user_id === $my_user_id) ?
                                   ['post_to' => "/user/{$user_id}/tweet",
-                                   'csrf_token' => $csrf_token] : NULL,
+                                   \Config\CSRF\form_var_name => $csrf_token] : NULL,
 
                                   'follow' => ($my_user_id && $my_user_id !== $user_id) ?
                                   ['post_to' => "/user/{$my_user_id}/follow/{$user_id}",
                                    'is_followed' => \Model\Following::is_followed($my_user_id, $user_id),
-                                   'csrf_token' => $csrf_token] : NULL,
+                                   \Config\CSRF\form_var_name => $csrf_token] : NULL,
 
                                   'pagination' => ['url' => "/user/{$user_id}",
                                                    'n_pages' => $n_pages,
