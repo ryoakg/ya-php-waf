@@ -1,9 +1,9 @@
 <?php
 use \Framework\Template as T;
 ?>
-<?php if (! empty($_SESSION['FLASH'])): ?>
+<?php if (! empty($_SESSION[\Config\Flash\session_key])): ?>
   <ul class="flash" id="flash">
-    <?php foreach($_SESSION['FLASH'] as $x): ?>
+    <?php foreach($_SESSION[\Config\Flash\session_key] as $x): ?>
       <li class="flash-item"><?php echo T::h($x); ?></li>
     <?php endforeach; ?>
   </ul>
