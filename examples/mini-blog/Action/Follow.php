@@ -10,7 +10,7 @@ class Follow {
 
         call_user_func($fun, (int)$follower_id, (int)$followee_id);
 
-        $redirect_to = isset($_SESSION['prev_url']) ? $_SESSION['prev_url'] : "/user";
+        $redirect_to = isset($_SESSION[\Config\UrlLog\session_key]) ? $_SESSION[\Config\UrlLog\session_key] : "/user";
         header("Location: {$redirect_to}", true, 303);
     }
 

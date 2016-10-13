@@ -37,7 +37,7 @@ $m = \Framework\Route::compile_url_action_map(require 'config/route.php');
 $path_to_route = \Framework\Route::path_to_route();
 
 // hook
-if ($_SERVER['REQUEST_METHOD'] === 'GET') $_SESSION['prev_url'] = $path_to_route;
+if ($_SERVER['REQUEST_METHOD'] === 'GET') $_SESSION[\Config\UrlLog\session_key] = $path_to_route;
 
 // HTTP response
 if (! $action = \Framework\Route::resolve($path_to_route)) {
