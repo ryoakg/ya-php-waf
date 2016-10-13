@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+if (PHP_SAPI !== 'cli') throw new Exception(PHP_SAPI . ' is not supported SAPI.');
+
+const APP_ROOT_DIR = __DIR__;
+require_once __DIR__ . '/../vendor/autoload.php';
+
+error_reporting(E_ALL | E_STRICT);
+ini_set('display_errors', 'On');
+
+spl_autoload_register(function($class){
+    $file = str_replace('\\', DIRECTORY_SEPARATOR , $class) . '.php';
+    if (is_readable($file)) require_once($file);
+}, true);
+spl_autoload_register(function($class){
+    throw new Exception("class `$class` is not found.");
+}, true);
+
+session_start();
+$env = isset($argv[1]) ? $argv[1] : 'dev';
+
+require_once('Framework/Config.php');
+eval(\Config\generate('common.json', "{$env}.json", 'cli.php'));
+echo \Config\Cli\message;
+
+eval(\Psy\sh());
