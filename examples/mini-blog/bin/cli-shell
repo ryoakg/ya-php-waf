@@ -16,8 +16,12 @@ spl_autoload_register(function($class){
     throw new Exception("class `$class` is not found.");
 }, true);
 
-require_once('Framework/Config.php');
-eval(\Config\generate('common.json', "dev.json", 'cli.php'));
+
 session_start();
+$env = isset($argv[1]) ? $argv[1] : 'dev';
+
+require_once('Framework/Config.php');
+eval(\Config\generate('common.json', "{$env}.json", 'cli.php'));
 echo \Config\Cli\message;
+
 eval(\Psy\sh());
